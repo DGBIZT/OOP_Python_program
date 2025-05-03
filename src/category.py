@@ -1,5 +1,6 @@
 from src.products import Product
 
+
 class Category:
     """Категория продуктов"""
     name: str
