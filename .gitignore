@@ -174,3 +174,4 @@ cython_debug/
 .pypirc
 # src/utils
 src/utils.py
+main_lesson2.py
