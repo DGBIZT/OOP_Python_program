@@ -23,9 +23,16 @@ class Category:
         Category.product_count += len(self.__products)
 
     def add_product(self, product: Product):
-       self.__products.append(product)
-       self.product_count += 1
-       self.category_count += 1
+
+        if not isinstance(product, Product):
+            raise TypeError("Необходимо добавить объект типа Product или его наследника")
+        self.__products.append(product)
+        self.product_count += 1
+        self.category_count += 1
+
+      # self.__products.append(product)
+       # self.product_count += 1
+       # self.category_count += 1
 
     @property
     def products(self):

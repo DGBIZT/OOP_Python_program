@@ -1,5 +1,6 @@
 from src.category import Category
 from src.products import Product
+import pytest
 
 # def test_category(task):
 #     assert task.name == "Смартфоны"
@@ -39,3 +40,5 @@ def test_products_property(category_with_products):
 
  # Проверяем, что результат соответствует ожидаемому
  assert actual_output == expected_output
+
+
