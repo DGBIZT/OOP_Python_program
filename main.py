@@ -86,6 +86,7 @@ if __name__ == '__main__':
     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
     product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
 
+
     print(str(product1))
     print(str(product2))
     print(str(product3))
