@@ -35,3 +35,9 @@ class Product:
         # else:
         #     self.__price = price
         #     return self.__price
+
+    def __str__(self):
+        return f"{self.name}, {self.__price}. Остаток: {self.quantity})"
+
+    def __add__(self, other):
+        return self.__price * self.quantity + other.__price * other.quantity

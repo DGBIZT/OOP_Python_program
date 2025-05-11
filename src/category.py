@@ -42,6 +42,7 @@ class Category:
         return prod_str
 
 
-
+    def __str__(self):
+        return f"{self.name}, количество продуктов: {Category.product_count}"
 
 
