@@ -175,4 +175,6 @@ cython_debug/
 # src/utils
 src/utils.py
 main_lesson2.py
+main_lesson1.py
+main_lesson3.py
 stepik.py
