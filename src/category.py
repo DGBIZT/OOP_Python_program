@@ -38,9 +38,9 @@ class Category:
     #     self.product_count += 1
     #     self.category_count += 1
 
-      # self.__products.append(product)
-       # self.product_count += 1
-       # self.category_count += 1
+    # self.__products.append(product)
+    # self.product_count += 1
+    # self.category_count += 1
 
     @property
     def products(self):
@@ -49,6 +49,5 @@ class Category:
             prod_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт. \n"
         return prod_str
 
-
     def __str__(self):
-        return f"{self.name}, количество продуктов: {Category.product_count}"
+        return f"{self.name}, количество продуктов: {sum(prod.quantity for prod in self.__products)}"

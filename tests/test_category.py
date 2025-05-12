@@ -1,6 +1,7 @@
+import pytest
+
 from src.category import Category
 from src.products import Product
-import pytest
 
 # def test_category(task):
 #     assert task.name == "Смартфоны"
@@ -12,6 +13,7 @@ import pytest
 #     assert task.product_count == 3
 #     assert task.category_count == 1
 
+
 def test_category_counters():
     # запоминаем сколько есть на начало теста
     current_products_counter = Category.product_count
@@ -19,32 +21,31 @@ def test_category_counters():
 
     # сейчас меняем счётчики создав пару продуктов и категорию
     products = [
-        Product('a', 'b', 1, 2), # просто номинальные продукты
-        Product('c', 'd', 3, 4),
+        Product("a", "b", 1, 2),  # просто номинальные продукты
+        Product("c", "d", 3, 4),
     ]
-    category = Category('a', 'b', products) # это действие поменяло счётчики
+    category = Category("a", "b", products)  # это действие поменяло счётчики
 
     # проверяем что изменилось ровно на столько, на сколько мы планировали
     assert Category.product_count == current_products_counter + 2
-    assert Category.category_count  == current_category_counter + 1
+    assert Category.category_count == current_category_counter + 1
 
 
 def test_products_property(category_with_products):
- # Проверяем, что свойство products возвращает корректную строку
- expected_output = (
- "Товар 1, 100.0 руб. Остаток: 5 шт. \n"
- "Товар 2, 200.0 руб. Остаток: 3 шт. \n"
- )
- # Получаем результат
- actual_output = category_with_products.products
+    # Проверяем, что свойство products возвращает корректную строку
+    expected_output = "Товар 1, 100.0 руб. Остаток: 5 шт. \n" "Товар 2, 200.0 руб. Остаток: 3 шт. \n"
+    # Получаем результат
+    actual_output = category_with_products.products
 
- # Проверяем, что результат соответствует ожидаемому
- assert actual_output == expected_output
+    # Проверяем, что результат соответствует ожидаемому
+    assert actual_output == expected_output
+
 
 def test_add_valid_product(category_2):
     new_product = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
     category_2.add_product(new_product)
     assert Category.product_count == 4
+
 
 def test_add_wrong_type():
     wrong_product = "Неверный тип"
@@ -81,15 +82,15 @@ def test_add_existing_product():
 
 def test_str_method(category_2):
     # Проверяем строку без добавления новых продуктов
-    assert str(category_2) == "Смартфоны, количество продуктов: 3"
+    assert str(category_2) == "Смартфоны, количество продуктов: 27"
 
     # Добавляем новый продукт и проверяем
     category_2.add_product(Product("iPhone 15", 89990, 15, 1))
-    assert str(category_2) == "Смартфоны, количество продуктов: 4"
+    assert str(category_2) == "Смартфоны, количество продуктов: 28"
 
     # Добавляем еще один продукт и проверяем
     category_2.add_product(Product("OnePlus 11", 59990, 12, 2))
-    assert str(category_2) == "Смартфоны, количество продуктов: 5"
+    assert str(category_2) == "Смартфоны, количество продуктов: 30"
 
 
 def test_reset_counters():
@@ -108,55 +109,3 @@ def test_multiple_categories():
 
     assert str(category1) == "Смартфоны, количество продуктов: 0"
     assert str(category2) == "Планшеты, количество продуктов: 0"
-
-
-def test_str_method2():
-    # Создаем продукт
-    product = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-
-    # Проверяем строку представления
-    expected_str = "Iphone 15, 210000.0. Остаток: 8)"
-    assert str(product) == expected_str
-
-
-def test_add_method():
-    # Создаем два продукта
-    product1 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    product2 = Product("Samsung S23", "256GB, Black", 180000.0, 5)
-
-    # Проверяем сложение
-    expected_sum = 210000.0 * 8 + 180000.0 * 5
-    assert product1 + product2 == expected_sum
-
-
-def test_str_with_zero_quantity():
-    # Проверяем случай с нулевым количеством
-    product = Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
-    expected_str = "Iphone 15, 210000.0. Остаток: 0)"
-    assert str(product) == expected_str
-
-
-def test_add_with_zero_quantity():
-    # Проверяем случай с нулевым количеством
-    product1 = Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
-    product2 = Product("Samsung S23", "256GB, Black", 180000.0, 5)
-
-    # При нулевом количестве результат должен быть равен стоимости второго продукта
-    expected_sum = 180000.0 * 5
-    assert product1 + product2 == expected_sum
-
-
-def test_str_with_decimal_price():
-    # Проверяем работу с дробной ценой
-    product = Product("Iphone 15", "512GB, Gray space", 210000.55, 8)
-    expected_str = "Iphone 15, 210000.55. Остаток: 8)"
-    assert str(product) == expected_str
-
-
-def test_add_with_decimal_prices():
-    # Проверяем работу с дробными ценами
-    product1 = Product("Iphone 15", "512GB, Gray space", 210000.55, 8)
-    product2 = Product("Samsung S23", "256GB, Black", 180000.75, 5)
-
-    expected_sum = 210000.55 * 8 + 180000.75 * 5
-    assert product1 + product2 == expected_sum

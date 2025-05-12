@@ -21,12 +21,12 @@ class Product:
             name=product_info["name"],
             price=product_info["price"],
             description=product_info["description"],
-            quantity=product_info["quantity"]
+            quantity=product_info["quantity"],
         )
 
     @property
     def price(self):
-        return (self.__price)
+        return self.__price
 
     @price.setter
     def price(self, price):
