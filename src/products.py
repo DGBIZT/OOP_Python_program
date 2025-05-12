@@ -21,12 +21,12 @@ class Product:
             name=product_info["name"],
             price=product_info["price"],
             description=product_info["description"],
-            quantity=product_info["quantity"]
+            quantity=product_info["quantity"],
         )
 
     @property
     def price(self):
-        return (self.__price)
+        return self.__price
 
     @price.setter
     def price(self, price):
@@ -35,3 +35,9 @@ class Product:
         # else:
         #     self.__price = price
         #     return self.__price
+
+    def __str__(self):
+        return f"{self.name}, {self.__price}. Остаток: {self.quantity})"
+
+    def __add__(self, other):
+        return self.__price * self.quantity + other.__price * other.quantity
