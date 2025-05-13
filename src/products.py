@@ -40,7 +40,17 @@ class Product:
         return f"{self.name}, {self.__price}. Остаток: {self.quantity})"
 
     def __add__(self, other):
-        return self.__price * self.quantity + other.__price * other.quantity
+        """Сложкение стоимости товара!
+        Если товар находится в одной группе, то производится складывание, в противном случае вызывается TypeError"""
+        if type(self) != type(other):
+            raise TypeError
+        try:
+            return self.__price * self.quantity + other.__price * other.quantity
+        except TypeError:
+            print("Возникла ошибка TypeError при попытке сложения")
+
+
+
 
 class Smartphone(Product):
     """Категория товара смартфон"""
