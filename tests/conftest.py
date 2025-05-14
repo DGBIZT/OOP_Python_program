@@ -1,7 +1,7 @@
 import pytest
 
 from src.category import Category
-from src.products import Product
+from src.products import LawnGrass, Product, Smartphone
 
 
 @pytest.fixture(autouse=True)
@@ -82,8 +82,50 @@ def products(self):
     return self.__products
 
 
+@pytest.fixture
+def smartphone():
+    return Smartphone(
+        name="iPhone 14",
+        description="Смартфон Apple",
+        price=79990,
+        quantity=10,
+        efficiency="A16 Bionic",
+        model="iPhone 14 Pro Max",
+        memory="1TB",
+        color="Space Black",
+    )
+
+
+@pytest.fixture
+def lawngrass():
+    return LawnGrass(
+        name="Газонная трава",
+        description="Элитная трава для газона",
+        price=500.0,
+        quantity=20,
+        country="Россия",
+        germination_period="7 дней",
+        color="Зеленый",
+    )
+
+
 # @pytest.fixture
 # def category():
 #  Category.product_count = 0
 #  Category.category_count = 0
 #  return Category("Смартфоны", "Описание", [])
+
+
+@pytest.fixture
+def product_a():
+    return Product("Товар A", "Описание A", 100, 5)
+
+
+@pytest.fixture
+def product_b():
+    return Product("Товар B", "Описание B", 200, 3)
+
+
+@pytest.fixture
+def different_type():
+    return "Не товар"
