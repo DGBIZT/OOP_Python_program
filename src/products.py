@@ -42,7 +42,7 @@ class Product:
     def __add__(self, other):
         """Сложкение стоимости товара!
         Если товар находится в одной группе, то производится складывание, в противном случае вызывается TypeError"""
-        if type(self) != type(other):
+        if type(self) is not type(other):
             raise TypeError
         try:
             return self.__price * self.quantity + other.__price * other.quantity
@@ -50,23 +50,22 @@ class Product:
             print("Возникла ошибка TypeError при попытке сложения")
 
 
-
-
 class Smartphone(Product):
     """Категория товара смартфон"""
+
     def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
         super().__init__(name, description, price, quantity)
-        self.efficiency = efficiency # Производительность
-        self.model = model # модель
-        self.memory = memory # Объем встроенной памяти
-        self.color = color # Цвет
+        self.efficiency = efficiency  # Производительность
+        self.model = model  # модель
+        self.memory = memory  # Объем встроенной памяти
+        self.color = color  # Цвет
 
 
 class LawnGrass(Product):
     """Категория товара Трава газонная"""
+
     def __init__(self, name, description, price, quantity, country, germination_period, color):
         super().__init__(name, description, price, quantity)
-        self.country = country # Cтрана-производитель
-        self.germination_period = germination_period # Cрок прорастания
-        self.color = color # цвет
-
+        self.country = country  # Cтрана-производитель
+        self.germination_period = germination_period  # Cрок прорастания
+        self.color = color  # цвет

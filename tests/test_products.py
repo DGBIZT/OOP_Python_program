@@ -1,5 +1,6 @@
 import pytest
-from src.products import Product, Smartphone
+
+from src.products import Product
 
 # def test_init_products(product):
 #     assert product.name == "Samsung Galaxy S23 Ultra"
@@ -80,6 +81,7 @@ def test_add_with_decimal_prices():
     expected_sum = 210000.55 * 8 + 180000.75 * 5
     assert product1 + product2 == expected_sum
 
+
 def test_init_smartphone(smartphone):
     """Проверка инициализации"""
     assert smartphone.name == "iPhone 14"
@@ -91,50 +93,60 @@ def test_init_smartphone(smartphone):
     assert smartphone.memory == "1TB"
     assert smartphone.color == "Space Black"
 
+
 def test_inheritance_smartphone(smartphone):
     """Проверка наследования от Product"""
     assert isinstance(smartphone, Product)
 
+
 def test_init_lawngrass(lawngrass):
     assert lawngrass.name == "Газонная трава"
-    assert lawngrass.description =="Элитная трава для газона"
+    assert lawngrass.description == "Элитная трава для газона"
     assert lawngrass.price == 500.0
     assert lawngrass.quantity == 20
     assert lawngrass.country == "Россия"
     assert lawngrass.germination_period == "7 дней"
     assert lawngrass.color == "Зеленый"
 
+
 def test_inheritance_lawngrass(lawngrass):
     assert isinstance(lawngrass, Product)
 
+
 # Тестирование __add__, Сложкение стоимости товара!
 # Если товар находится в одной группе, то производится складывание, в противном случае вызывается TypeError
-def test_add_same_type( product_a, product_b):
- """Проверка сложения товаров одного типа"""
- result = product_a + product_b
- assert result == 100 * 5 + 200 * 3
- assert result == 1100
+def test_add_same_type(product_a, product_b):
+    """Проверка сложения товаров одного типа"""
+    result = product_a + product_b
+    assert result == 100 * 5 + 200 * 3
+    assert result == 1100
 
-def test_add_different_types( product_a, different_type):
- """Проверка попытки сложения с другим типом"""
- with pytest.raises(TypeError):
-    product_a + different_type
+
+def test_add_different_types(product_a, different_type):
+    """Проверка попытки сложения с другим типом"""
+    with pytest.raises(TypeError):
+        product_a + different_type
+
 
 def test_add_int(product_a):
- """Проверка сложения с целым числом"""
- with pytest.raises(TypeError):
-    product_a + 5
+    """Проверка сложения с целым числом"""
+    with pytest.raises(TypeError):
+        product_a + 5
+
 
 def test_add_list(product_a):
- """Проверка сложения со списком"""
- with pytest.raises(TypeError):
-    product_a + [1, 2, 3]
+    """Проверка сложения со списком"""
+    with pytest.raises(TypeError):
+        product_a + [1, 2, 3]
 
-def test_add_float( product_a):
- """Проверка сложения с числом с плавающей точкой"""
- with pytest.raises(TypeError):
-    product_a + 5.5
+
+def test_add_float(product_a):
+    """Проверка сложения с числом с плавающей точкой"""
+    with pytest.raises(TypeError):
+        product_a + 5.5
+
+
 def test_add_none(product_a):
- """Проверка сложения с None"""
- with pytest.raises(TypeError):
-    product_a + None
+    """Проверка сложения с None"""
+    with pytest.raises(TypeError):
+        product_a + None
