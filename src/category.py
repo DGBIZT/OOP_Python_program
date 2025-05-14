@@ -1,3 +1,5 @@
+
+
 from src.products import Product, Smartphone, LawnGrass
 
 
@@ -22,25 +24,15 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
-    def add_product(self, product: Product):
-        if not isinstance(product, Smartphone) and not isinstance(product, LawnGrass):
-            raise TypeError(f"Необходимо добавить объект типа {self.name} или его наследника")
+    def add_product(self, product: Product) :
+        """Добавление продукта в категорию """
+        if not isinstance(product, Product):
+            raise TypeError(f"Необходимо добавить объект типа Product или его наследника")
         if product in self.__products:
             raise ValueError("Продукт уже существует в категории")
         self.__products.append(product)
         Category.product_count += 1  # Увеличиваем только product_count
 
-    # def add_product(self, product: Product):
-    #
-    #     if not isinstance(product, Product):
-    #         raise TypeError("Необходимо добавить объект типа Product или его наследника")
-    #     self.__products.append(product)
-    #     self.product_count += 1
-    #     self.category_count += 1
-
-    # self.__products.append(product)
-    # self.product_count += 1
-    # self.category_count += 1
 
     @property
     def products(self):
