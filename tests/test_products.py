@@ -1,6 +1,8 @@
 import pytest
 
 from src.products import Product
+from src.products import BaseProduct
+from src.products import Smartphone
 
 # def test_init_products(product):
 #     assert product.name == "Samsung Galaxy S23 Ultra"
@@ -150,3 +152,39 @@ def test_add_none(product_a):
     """Проверка сложения с None"""
     with pytest.raises(TypeError):
         product_a + None
+
+# Тестирования абстрактного класса и класс-миксин
+def test_repr(valid_product_info):
+    # Создаем продукт
+    product = Product.new_product(valid_product_info)
+
+    # Проверяем вывод repr
+    expected_repr = "Product(Test Product, This is a test product, 100.5, 10)"
+    assert repr(product) == expected_repr
+
+
+def test_init_printing(capsys, valid_product_info):
+    # Проверяем, что при создании объекта выводится repr
+    Product.new_product(valid_product_info)
+
+    expected_output = "Product(Test Product, This is a test product, 100.5, 10)\n"
+    assert capsys.readouterr().out == expected_output
+
+
+def test_abstract_method():
+    # Проверяем, что при отсутствии обязательных атрибутов возникает ошибка
+    with pytest.raises(TypeError):
+        class MissingMethodProduct(BaseProduct):
+            pass
+
+        # Создаем экземпляр для принудительного вызова ошибки
+        MissingMethodProduct()
+
+def test_correct_implementation():
+    # Проверяем корректную реализацию
+    class CorrectProduct(BaseProduct):
+        @classmethod
+        def new_product(cls, *args, **kwargs):
+            return cls()
+
+    CorrectProduct.new_product()
