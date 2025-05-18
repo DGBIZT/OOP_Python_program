@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseProduct(ABC):
 
     @classmethod
@@ -8,7 +9,7 @@ class BaseProduct(ABC):
         pass
 
 
-class  PrintMixin:
+class PrintMixin:
     def __init__(self):
         print(repr(self))
 
@@ -36,7 +37,7 @@ class Product(BaseProduct, PrintMixin):
 
     @classmethod
     def new_product(cls, product_info):
-        return  cls(
+        return cls(
             name=product_info["name"],
             price=product_info["price"],
             description=product_info["description"],

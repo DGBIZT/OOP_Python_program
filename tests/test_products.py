@@ -1,8 +1,6 @@
 import pytest
 
-from src.products import Product
-from src.products import BaseProduct
-from src.products import Smartphone
+from src.products import BaseProduct, Product
 
 # def test_init_products(product):
 #     assert product.name == "Samsung Galaxy S23 Ultra"
@@ -153,6 +151,7 @@ def test_add_none(product_a):
     with pytest.raises(TypeError):
         product_a + None
 
+
 # Тестирования абстрактного класса и класс-миксин
 def test_repr(valid_product_info):
     # Создаем продукт
@@ -174,11 +173,13 @@ def test_init_printing(capsys, valid_product_info):
 def test_abstract_method():
     # Проверяем, что при отсутствии обязательных атрибутов возникает ошибка
     with pytest.raises(TypeError):
+
         class MissingMethodProduct(BaseProduct):
             pass
 
         # Создаем экземпляр для принудительного вызова ошибки
         MissingMethodProduct()
+
 
 def test_correct_implementation():
     # Проверяем корректную реализацию
