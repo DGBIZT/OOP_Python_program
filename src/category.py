@@ -40,3 +40,14 @@ class Category:
 
     def __str__(self):
         return f"{self.name}, количество продуктов: {sum(prod.quantity for prod in self.__products)}"
+
+    def middle_price(self):
+        """Подсчитывание среднего ценника всех товаров"""
+        sum_price = 0
+        try:
+            for product in self.__products:
+                sum_price += product.price
+            avg_price = sum_price / Category.product_count
+        except ZeroDivisionError:
+            return 0
+        return avg_price
