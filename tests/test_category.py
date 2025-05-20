@@ -109,3 +109,34 @@ def test_multiple_categories():
 
     assert str(category1) == "Смартфоны, количество продуктов: 0"
     assert str(category2) == "Планшеты, количество продуктов: 0"
+
+
+# Тест для подсчета средней цены метод middle_price
+def test_middle_price():
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 1000, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 2000, 8)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 1500, 14)
+
+    category1 = Category("Смартфоны", "Категория смартфонов", [product1, product2, product3])
+
+    # Проверяем расчет средней цены
+    assert category1.middle_price() == 1500.0
+
+
+# Создаем категорию с товарами с числами с плавающей запятой
+def test_middle_price_decimal_values():
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 1000.5, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 2000.75, 3)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 1500.25, 2)
+
+    category1 = Category("Смартфоны", "Категория смартфонов", [product1, product2, product3])
+
+    # Проверяем расчет средней цены
+    assert category1.middle_price() == 1500.5
+
+
+def test_middle_price_zero_division():
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+
+    # Проверяем обработку ZeroDivisionError
+    assert category_empty.middle_price() == 0

@@ -26,6 +26,10 @@ class Product(BaseProduct, PrintMixin):
     quantity: int  # Количество
 
     def __init__(self, name, description, price, quantity):
+        if quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        elif quantity < 0:
+            raise ValueError("Товар с отрицательным количеством не может быть добавлен")
         self.name = name
         self.description = description
         self.__price = price
