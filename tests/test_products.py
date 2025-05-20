@@ -50,20 +50,29 @@ def test_add_method():
 
 
 def test_str_with_zero_quantity():
-    # Проверяем случай с нулевым количеством
-    product = Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
-    expected_str = "Iphone 15, 210000.0. Остаток: 0)"
-    assert str(product) == expected_str
+    # Создаем объект с минимальным допустимым количеством
+    product = Product("Iphone 15", "512GB, Gray space", 210000.0, 1)
+    assert str(product) == "Iphone 15, 210000.0. Остаток: 1)"
+
+    # # Проверяем случай с нулевым количеством
+    # product = Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
+    # expected_str = "Iphone 15, 210000.0. Остаток: 0)"
+    # assert str(product) == expected_str
 
 
 def test_add_with_zero_quantity():
-    # Проверяем случай с нулевым количеством
-    product1 = Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
-    product2 = Product("Samsung S23", "256GB, Black", 180000.0, 5)
+    # Создаем объекты с допустимыми значениями
+    product1 = Product("Iphone 15", "512GB, Gray space", 210000.0, 1)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 2)
+    assert product1 + product2 == 210000 * 3
 
-    # При нулевом количестве результат должен быть равен стоимости второго продукта
-    expected_sum = 180000.0 * 5
-    assert product1 + product2 == expected_sum
+    # # Проверяем случай с нулевым количеством
+    # product1 = Product("Iphone 15", "512GB, Gray space", 210000.0, 0)
+    # product2 = Product("Samsung S23", "256GB, Black", 180000.0, 5)
+    #
+    # # При нулевом количестве результат должен быть равен стоимости второго продукта
+    # expected_sum = 180000.0 * 5
+    # assert product1 + product2 == expected_sum
 
 
 def test_str_with_decimal_price():
@@ -189,3 +198,13 @@ def test_correct_implementation():
             return cls()
 
     CorrectProduct.new_product()
+
+# Тестирование добавление товара с нулевым количеством
+def test_product_by_zero():
+    """Проверяем товар с нулевым количеством"""
+    with pytest.raises(ValueError):
+        Product("Бракованный товар", "Неверное количество", 1000.0, 0)
+
+    # Проверяем товар с отрицательным количеством
+    with pytest.raises(ValueError):
+        Product("Бракованный товар", "Неверное количество", 1000.0, -1)
