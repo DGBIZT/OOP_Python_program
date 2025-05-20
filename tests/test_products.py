@@ -199,6 +199,7 @@ def test_correct_implementation():
 
     CorrectProduct.new_product()
 
+
 # Тестирование добавление товара с нулевым количеством
 def test_product_by_zero():
     """Проверяем товар с нулевым количеством"""
